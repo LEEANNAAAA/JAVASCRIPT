@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // var a = ['a','d','c',4,5]
+        // for (var i in a){
+        // alert(i)
+        // } > 0.1.2.3.4
+
+        // var a = ['a','d','c',4,5]
+        // for (var i=0; i<a.length; i++){
+        //     alert(i)
+        // }
+
+        // for(i=1;i<10;i++){
+        //     alert('2 x '+i+' = '+2*i)
+        // }
+
+        // var array = ['포도','사과','바나나','망고']
+        // for (var i in array){
+        //     alert(array[i])
+        // }
+
+        // var a = [5,4,3,6,1,2,8,7,9,0] //버블정렬
+        // var temp=0
+        // for(var j=0;j<a.length-1;j++){ //마지막 칸은 비교를 하면 안되기 때문에 -1은 필수! 다른 곳에서는 작동안 할 수도 있다.
+        //   for(var i=0;i<a.length-1;i++){
+        //       if(a[i]>a[i+1]){
+        //           temp =a[i]
+        //           a[i]=a[i+1]
+        //           a[i+1]=temp
+        //       } 
+        //   }
+        // }
+        //   alert(a)
+    
+        
+        
+        var a = [5,4,3]   //선택정렬
+        var temp =0
+        var min_num =0
+        for(var j=0;j<a.length;j++){
+            min_num=j
+            for(var i=j+1; i<a.length;i++){
+                if(a[min_num]>a[i]){
+                    min_num= i
+                }
+            }
+            temp=a[min_num]
+            a[min_num] = a[j]
+            a[j] = temp
+        }                                                        
+    alert(a)
+
+
+
+    //         var a = [5,4,3]   //선택정렬(큰 수 부터)
+    //     var temp =0
+    //     var max_num =0
+    //     for(var j=0;j<a.length;j++){ // 최소값 바꿔주기
+    //         man_num=j    // 
+    //         for(var i=j+1; i<a.length;i++){
+    //             if(a[max_num]<a[i]){
+    //                 max_num= i
+    //             }
+    //         }
+    //         temp=a[max_num]
+    //         a[max_num] = a[j]
+    //         a[j] = temp
+    //     }                                                        
+    // alert(a)
+
+
+    // var a = [5,4,3,6,1,2,8,7,9,0]
+    // alert(a.sort())
+
+        
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
