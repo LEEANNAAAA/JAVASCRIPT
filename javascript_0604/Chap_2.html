@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //랜덤한 정수를 생성
+        function nextRandomInteger(limit){
+            return Math.round(Math.random()*limit);
+        }
+
+        //랜덤한 알파벳을 리턴하는 함수
+        var alphabet = 'qwertasdfgzxcvyuiophjklnm';
+        function randomAlphabet(){
+            return alphabet.charAt(nextRandomInteger(25));
+        }
+
+        //양수와 음수로 랜덤한 속도를 생성하는 함수
+        function randomSpeed(maxSpeed){
+            return Math.random()*maxSpeed-Math.random()*maxSpeed;
+        }
+
+        function randomColor(colorList){
+            ranNum = Math.random()*colorList.length;
+            return colorList[parseInt(ranNum)]  //parseInt 는 소수즘을 없애주기 위해서
+        }
+            </script>
+
+        <!--생성자 함수-->
+        <script>
+            //MovingText의 생성자 함수
+            var canvasWidth = 800;
+            var canvasHeight = 500;
+            var colorList = ['red', 'blue','green','yellow','orange','violet','skyblue','greenyellow','black','pink'];
+            
+
+            function MovingText(){
+                //위치와 속도 속성
+                this.x = nextRandomInteger(canvasWidth);
+                this.y = nextRandomInteger(canvasHeight);
+                this.vx = randomSpeed(10);
+                this.vy = randomSpeed(10);
+
+                //문서 객체를 생성
+                this.body = document.createElement('h1');   //h1태그 만든 것
+                this.body.innerHTML = randomAlphabet(); //알파벳 하나를 넣고
+                this.body.style.position = 'absolute';
+                this.body.style.color = '#' + Math.round(Math.random()*0xffffff).toString(16);
+                // randomColor(colorList); //컬러 하나 
+                this.body.style.fontSize = (20+ Math.random()*50)+'px';
+
+                //문서 객체를 document.body에 추가
+                document.body.appendChild(this.body);
+            }
+
+            MovingText.prototype.move = function(){
+                //범위검사
+                if(this.x<0 || this.x > canvasWidth){this.vx *=-1;} //범위를 벗어나면 반대쪽으로 이동
+                if(this.y<0||this.y>canvasHeight){this.vy *=-1;}
+
+                //이동
+                this.x += this.vx;
+                this.y += this.vy;
+
+                //화면에 이동표시
+                this.body.style.left = this.x+'px';
+                this.body.style.top = this.y+'px';
+            };
+        </script>
+        
+        <!--window.onload-->
+        <script>
+            window.onload = function(){
+                //변수를 선언
+                var movingTexts = [];
+
+                //배열에 MovingText 객체 100개를 생성
+                for(var i=0; i<150; i++){
+                    movingTexts.push(new MovingText());
+                }
+
+                //움직임
+                setInterval(function(){
+                    for(var i in movingTexts){
+                        movingTexts[i].move();
+                    }
+                },1000/30); //1초에 30번 move를 실행
+            };
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

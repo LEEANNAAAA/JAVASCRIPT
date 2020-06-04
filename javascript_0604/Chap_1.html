@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HTML 태그 이름을 이용한 선택</h1>
+    <h1 id="a">HIHIHI</h1>
+    <h1 id="b">1111
+        <p>2222</p>
+    </h1>
+    <h1 id="clock"></h1>
+
+    <ul>
+        <li>첫 번째 아이템이에요!</li>
+    </ul>
+    <script>
+        // var selectedItem = 
+        // document.getElementsByTagName("li");
+        // selectedItem.item(0).style.color = "green";   //글자의 색이 그린
+        // selectedItem.item(0).innerHTML = "green";    //그린으로 출력
+
+
+        // var selectedItem = document.getElementById("a");
+        // selectedItem.style.backgroundColor="gray";
+        // selectedItem.innerHTML = "green";   //hihihi가 안나오고 green으로 뜨고 백그라운드 색 그레이로 나옴, 만약 green을 삭제하면 hihihi가 뜬다
+        // selectedItem.style.textAlign="center";
+
+        // var selectedItem = 
+        // document.getElementById("b");
+        // selectedItem.remove()   //제거되었으므로 화면에 출력되지 않음
+
+        // window.onload = function(){
+        //     alert('dd') //바로 실행
+        // }
+
+        window.onload = function(){
+            var clock = document.getElementById('clock')
+
+            setInterval(function(){
+                clock.innerHTML = new Date().toString()
+            },1000) //1초마다 한번씩 현재시간을 가져온다(시간이 1초마다 바뀜)
+        }
+
+
+    </script>
+</body>
+</html>
