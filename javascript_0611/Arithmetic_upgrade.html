@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <!-- 합쳐지고 최소화된 최신 CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+      <!-- 부가적인 테마 -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+      
+      <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+      <style>
+        table,td{
+            border: 1px solid black;
+            width: 500px;
+            height: 80px;
+            margin: auto;
+            text-align: center;
+            font-size: 20px;
+        }
+        th{
+            width: 500px;
+            height: 50px;
+            text-align: center;
+        }
+        .math{
+            text-align: center;
+        }
+       body{
+           background-color: skyblue;
+       }
+    </style>
+</head>
+<body align='center'>
+    
+    <div class="math">
+        <h1>수학 공부</h1>
+        <p>사칙연산을 활용한 계산 연습</p>
+        <h1>Arithmetic training site</h1>
+        <br>
+    <table>
+    <tr>
+        <th colspan="3">Difficulty</th>
+    </tr>
+    <tr>
+        <td>easy</td>
+        <td>medium</td>
+        <td>hard</td>
+    </tr>
+    </table>
+    </div>
+
+    <form>
+        <label class = "ari" for="class">사칙연산</label>
+    </form>
+    <div align='center' class="panel panel-primary">
+        <div class="panel-heading">문제</div>
+        <div class="panel-body" style="font-size: 50px;" id='q' ></div>
+    </div>
+
+    
+    <!-- <h1 style="font-size:100px" id=q>123</h1> -->
+    <div>
+        시험보기
+        <h1 style="font-size: 100px" id=q></h1>
+        <input id="my" placeholder="값을 입력하세요" value="">
+        <input type="hidden" id="ans" value="">
+            <button onclick="check()" id="bbb">정답 확인</button> <!--버튼을 클릭했을 때 실행(단순 실행만)-->
+            <button onclick="refresh()" id="aaa">다음 문제</button>
+            <button onclick="score()">성적 확인</button>
+            <button onclick="off()" >문제 끝</button>
+            <br>
+            맞은 문제 : <input id='a' disabled/>
+            전체 문제 : <input id='b' disabled/>
+            틀린 문제 : <input id='c' disabled/>
+
+        </div>
+    
+    <!-- <h1 id='cor' style="display: none;"> 정답입니다.</h1> -->
+
+
+    <script>
+
+    
+        window.onload = refresh() 
+        
+        
+        var count =0
+        var cor = 0
+        var err= 0
+        
+        function refresh(){
+            var level = 10
+            
+            if(count >= 20){
+                level = 1000
+            } else if(count >= 10){
+                level = 100
+            } else {
+                level = 10
+            }
+            
+            var cal_list = ['+','-','*','/']
+            var q = document.getElementById('q');
+            var num1 = parseInt(Math.random()*level);
+            var num2 = parseInt(Math.random()*level);
+            var cal = cal_list[parseInt(Math.random()*4)]
+            if(cal == '/'){
+                while(true){
+                    num1 = parseInt(Math.random()*level);
+                    num2 = parseInt(Math.random()*level/10);
+                    if(num1 != 0 && num2 != 0){
+                        break
+                    }
+                }
+            }
+            var  ques = num1+" "+cal+" "+num2;
+            q.innerHTML= ques
+            
+            if(cal == '+'){
+                document.getElementById('ans').value = num1+num2
+            } else if(cal == '-'){
+                document.getElementById('ans').value = num1-num2
+            }else if(cal == '*'){
+                document.getElementById('ans').value = num1*num2
+            }else{
+                document.getElementById('ans').value = num1/num2
+            }
+            
+            if(count == 30){
+                    document.getElementById("aaa").disabled=true;
+                    document.getElementById("bbb").disabled=true;
+                }
+        }
+        // function off(){
+        // document.getElementById("aaa").disabled = true;
+        //         }
+            
+        
+        function check(){
+            var my = document.getElementById('my').value
+            var ans = document.getElementById('ans').value
+            
+            if(ans == my){
+                // document.getElementById('cor').style.display = 'block'
+                alert('정답입니다')
+                count = count+1
+                cor = cor+1
+                document.getElementById('a').value = cor
+                    document.getElementById('b').value = count
+                } else if(my == '') {
+                    alert('값을 입력하세요')
+                } else{
+                    // document.getElementById('err').style.display = 'block'
+                    alert('오답입니다')
+                    count = count+1
+                    err = err+1
+                    document.getElementById('b').value = count
+                    document.getElementById('c').value = err
+                } 
+
+                refresh()
+
+                if(count == 30){
+                    if(cor>=27){
+                        alert('A')
+                    }else if(cor>=24){
+                        alert('B')
+                    }else if(cor>=21){
+                        alert('C')
+                    } else { 
+                        alert('F')
+                    }
+                }
+                
+            }
+            
+            function score(){
+                if(count == 30){
+                    if(cor>=27){
+                        alert('A')
+                    }else if(cor>=24){
+                        alert('B')
+                    }else if(cor>=21){
+                        alert('C')
+                    } else { 
+                        alert('F')
+                    }
+                }
+            }
+                
+    </script>
+
+</body>
+</html>
