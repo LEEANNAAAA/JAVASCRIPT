@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            background-color:wheat;
+        }
+
+    </style>
+</head>
+<body style="font-size: 60px;" align='center'>
+    <input id='con' style="font-size: 60px;">
+    <br>
+    <div>
+
+        <button style="width: 120px; height: 50px; font-size: 30px;" 
+        onclick="reset()">ac</button>
+        <button id='l' style="width: 120px; height: 50px; font-size: 30px;"
+        onclick="cal()">=</button>
+        
+        <br>
+
+        <button id='a' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('a')">1</button>
+        <button id='b' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('b')">2</button>
+        <button id='c' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('c')">3</button>
+        <button id='m' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('m')">+</button>
+        <br>
+        <button id='d' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('d')">4</button>
+        <button id='e' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('e')">5</button>
+        <button id='f' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('f')">6</button>
+        <button id='n' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('n')">-</button>
+        <br>
+        <button id='g' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('g')">7</button>
+        <button id='h' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('h')">8</button>
+        <button id='i' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('i')">9</button>
+        <button id='o' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('o')">*</button>
+        <br>
+
+        <button id='j' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('j')">.</button>
+        <button id='k' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('k')">0</button>
+        <button id='q' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="era()"><</button>
+        <button id='p' style="width: 50px; height: 50px; font-size: 30px;"
+        onclick="clk('p')">/</button>
+        
+        <br>
+        
+       
+        
+        
+     
+       
+        <br>
+        
+    </div>
+        
+    <script>
+        var key = document.getElementById('con')
+        key.onkeydown = function(){
+
+            if(event.keyCode == 13){
+                cal()
+            }
+            // if(event.keyCode == 8){
+            //     era()
+            // }
+        };
+
+
+         function clk(x){
+             var btn = document.getElementById(x).textContent
+             var con = document.getElementById('con').value     
+            //  input태그를 불러오고 그 안에 들어있는 값을 불러온다
+                 con = con + btn
+             document.getElementById('con').value = con
+         }
+         
+        function cal(){
+             var con = document.getElementById('con').value
+             var result =0
+             var temp = ''
+             var num = []
+             var op = []
+             for (var i = 0; i < con.length; i++) {
+                 if(con[i] != '+' && con[i] != '-' && con[i] != '*' && con[i] != '/'){
+                     temp = temp + con[i]
+                 }else{
+                     num.push(parseInt(temp))
+                     op.push(con[i])
+                     temp=''
+                 }
+             
+             }  
+                 num.push(parseInt(temp))   //마지막 숫자 넣어주기
+                 result = num[0]            // 첫 숫자 넣어주기
+
+
+
+
+
+
+
+             for(let i =0; i<op.length; i++){
+
+                if(op[i] == '+'){
+                    result = result+num[i+1]
+                } else  if(op[i] == '-'){
+                    result = result-num[i+1]
+                } else  if(op[i] == '*'){
+                    result = result*num[i+1]
+                } else  if(op[i] == '/'){
+                    result= result/num[i+1]
+                }
+             }
+
+        document.getElementById('con').value = result
+        }
+
+
+        function reset() {    
+            document.getElementById('con').value = "";
+        }
+
+        function era(){
+            var cc= document.getElementById('con').value
+             var x=cc.slice(0,-1)
+            document.getElementById('con').value=x
+        }
+     </script>
+ 
+ <!-- 덧셈뺼셈만 가능, 곱셈, 나눗셈은 우선적으로 계산 못함 -->
+
+</body>
+</html>
